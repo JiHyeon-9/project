@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <%
 session.invalidate(); //세션 자체를 삭제
-out.print("로그아웃 되었습니다.");
+response.sendRedirect("mainpage.jsp");
 %>

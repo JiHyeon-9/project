@@ -28,7 +28,7 @@ try {
 		%>
 		<script>
 		    alert('존재하지 않는 아이디입니다.');
-		    location.href='loginForm.jsp';
+		    location.href='mainpage.jsp';
 		</script>
 		<%
 		    return;
@@ -37,16 +37,18 @@ try {
 			%>
 			<script>
 			    alert('비밀번호가 일치하지 않습니다.');
-			    location.href='loginForm.jsp';
+			    location.href='mainpage.jsp';
 			</script>
 			<%
 			    return;
 			}
 	
 	session.setAttribute("id", rs.getString("id"));
+	session.setAttribute("password", rs.getString("password"));
 	session.setAttribute("nickname", rs.getString("nickname"));
+	session.setAttribute("message", rs.getString("message"));
 	
-	response.sendRedirect("info.jsp");
+	response.sendRedirect("info.jsp"); //게임화면으로 돌아가야 함
 	
 	
 } catch (Exception e){

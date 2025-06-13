@@ -23,13 +23,11 @@ public class saveProfileServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
 
-        String name = request.getParameter("name");
         String nickname = request.getParameter("nickname");
         String password = request.getParameter("password");
         String statusMessage = request.getParameter("message");
         String photo = request.getParameter("photo");
 
-        session.setAttribute("name", name);
         session.setAttribute("nickname", nickname);
         session.setAttribute("password", password);
         session.setAttribute("message", statusMessage);

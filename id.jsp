@@ -5,10 +5,9 @@
 <%
 String nickname = request.getParameter("nickname");
 
-String url = "jdbc:mysql://localhost:3306/profile";
-String dbId = "root";
-String dbPass = "0929";
-
+String url = "jdbc:mysql://localhost:3306/project";
+String dbId = "cye";
+String dbPass = "pwpw12211234*";
 Connection conn = null;
 PreparedStatement pstmt = null;
 ResultSet rs = null;
@@ -17,14 +16,14 @@ try {
 	Class.forName("com.mysql.cj.jdbc.Driver");
 	conn = DriverManager.getConnection(url, dbId, dbPass);
 	
-	String sql = "select userid from signup where nickname=?";
+	String sql = "select id from signup where nickname=?";
 	pstmt=conn.prepareStatement(sql);
 	
 	pstmt.setString(1, nickname);
 	rs = pstmt.executeQuery();
 	
 	if(rs.next()){
-		String userid = rs.getString("userid");
+		String userid = rs.getString("id");
 		out.print("사용자 id: "+ userid);
 	} else {
 		out.print("아이디가 존재하지 않습니다.");

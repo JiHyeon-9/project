@@ -5,9 +5,9 @@
 <%
 String userid = request.getParameter("userid");
 
-String url = "jdbc:mysql://localhost:3306/profile";
-String dbId = "root";
-String dbPass = "0929";
+String url = "jdbc:mysql://localhost:3306/project";
+String dbId = "cye";
+String dbPass = "pwpw12211234*";
 
 Connection conn = null;
 PreparedStatement pstmt = null;

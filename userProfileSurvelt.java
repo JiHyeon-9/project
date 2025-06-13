@@ -1,10 +1,11 @@
+package project;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class UploadPhotoServlet extends HttpServlet {
+public class userProfileSurvelt extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 

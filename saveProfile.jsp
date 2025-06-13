@@ -15,7 +15,7 @@
     //String exp = request.getParameter("exp");  //경험치
 
     // 세션에 저장
-    session.setAttribute("userid", id);
+    session.setAttribute("id", id);
     session.setAttribute("nickname", nickname);
     session.setAttribute("password", password);
     session.setAttribute("message", message);
@@ -28,9 +28,9 @@
     PreparedStatement pstmt = null;
 
     try {
-        String url = "jdbc:mysql://localhost:3306/profile";
-        String dbId = "root";
-        String dbPass = "0929";
+    	String url = "jdbc:mysql://localhost:3306/profile";
+    	String dbId = "root";
+    	String dbPass = "0929";
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         conn = DriverManager.getConnection(url, dbId, dbPass);
