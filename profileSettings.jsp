@@ -1,6 +1,7 @@
 <%@ page import="java.sql.*, com.oreilly.servlet.MultipartRequest, com.oreilly.servlet.multipart.DefaultFileRenamePolicy" %>
 <%@ page import="java.io.File" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="db.jsp"%>
 
 <%
 request.setCharacterEncoding("UTF-8");
@@ -26,6 +27,7 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
 
     String nickname = multi.getParameter("nickname");
     String password = multi.getParameter("password");
+    String message = multi.getParameter("message");
 
     // 파일 업로드 처리
     String fileName = "";
@@ -44,22 +46,14 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
         }
     }
 
-    Connection conn = null;
-    PreparedStatement pstmt = null;
-
     try {
-        String url = "jdbc:mysql://localhost:3306/profile";
-        String dbId = "root";
-        String dbPass = "0929";
-
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection(url, dbId, dbPass);
-
-        String sql = "UPDATE signup SET password = ?, nickname = ? WHERE id = ?";
+        
+        String sql = "UPDATE signup SET password = ?, nickname = ?, message = ? WHERE id = ?";
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, password);
         pstmt.setString(2, nickname);
-        pstmt.setString(3, userid);
+        pstmt.setString(3, message);
+        pstmt.setString(4, userid);
 
         int result = pstmt.executeUpdate();
 
@@ -67,6 +61,7 @@ if (request.getMethod().equalsIgnoreCase("POST")) {
             // 성공 시 세션 값도 갱신
             session.setAttribute("nickname", nickname);
             session.setAttribute("password", password);
+            session.setAttribute("message", message);
 
             out.println("<script>alert('프로필 수정 완료'); location.href='info.jsp';</script>");
         } else {

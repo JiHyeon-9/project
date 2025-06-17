@@ -1,20 +1,13 @@
 <%@page import="java.sql.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ include file="db.jsp"%>
 <%
 String nickname = request.getParameter("nickname");
 
-String url = "jdbc:mysql://localhost:3306/project";
-String dbId = "cye";
-String dbPass = "pwpw12211234*";
-Connection conn = null;
-PreparedStatement pstmt = null;
-ResultSet rs = null;
 
 try {
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	conn = DriverManager.getConnection(url, dbId, dbPass);
+
 	
 	String sql = "select id from signup where nickname=?";
 	pstmt=conn.prepareStatement(sql);

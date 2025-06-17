@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>Add commentMore actions
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +63,6 @@
         <div class="option_link">
             <a href="mainpage.jsp">로그인으로 돌아가기</a>
         </div>
-    </div>Add commentMore actions
+    </div>
 </body>
 </html>

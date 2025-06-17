@@ -4,8 +4,7 @@
 <head>
     <title>회원가입</title>
     <style>
-    /*유저 db에 정보 업로드 기능 미구현*/
-        body {
+   		body {
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -57,10 +56,10 @@
         <%
         //입력값이 모두 있으면 완료 메시지 출력
         String nickname = request.getParameter("nickname");
-        String userid = request.getParameter("id");
+        String id = request.getParameter("id");
         String password = request.getParameter("password");
-        if (nickname != null && userid != null && password != null &&
-            !nickname.isEmpty() && !userid.isEmpty() && !password.isEmpty()) {
+        if (nickname != null && id != null && password != null &&
+             !nickname.isEmpty() && !id.isEmpty() && !password.isEmpty()) {
         %>
             <div class="complete">회원가입이 완료되었습니다!</div>
             <div class="option_link">
@@ -73,6 +72,7 @@
             <input type="text" name="nickname" placeholder="닉네임" required>
             <input type="text" name="id" placeholder="아이디" required>
             <input type="password" name="password" placeholder="비밀번호" required>
+            <input type="textarea" name="message" placeholder="상태 메세지" >
             <button type="submit">회원가입</button>
             <div class="option_link">
                 <a href="mainpage.jsp">로그인으로 돌아가기</a></div>

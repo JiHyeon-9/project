@@ -2,6 +2,7 @@
 <%@ page import="javax.servlet.http.Part" %>
 <%@ page import="javax.servlet.annotation.MultipartConfig" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="db.jsp" %>
 <%
     request.setCharacterEncoding("UTF-8");
 
@@ -11,31 +12,15 @@
     String password = request.getParameter("password");
     String message = request.getParameter("message");
     
-    //String Lv = request.getParameter("Lv");  //레벨
-    //String exp = request.getParameter("exp");  //경험치
-
     // 세션에 저장
     session.setAttribute("id", id);
     session.setAttribute("nickname", nickname);
     session.setAttribute("password", password);
     session.setAttribute("message", message);
-    
-    //session.setAttribute("Lv", Lv);  //레벨
-    //session.setAttribute("exp", exp);  //경험치
-
-    // DB 저장 처리
-    Connection conn = null;
-    PreparedStatement pstmt = null;
 
     try {
-    	String url = "jdbc:mysql://localhost:3306/profile";
-    	String dbId = "root";
-    	String dbPass = "0929";
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection(url, dbId, dbPass);
-
-        String sql = "INSERT INTO user_profile (id, nickname, password, message, photo) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO signup (id, nickname, password, message, photo) VALUES (?, ?, ?, ?, ?)";
 
         pstmt = conn.prepareStatement(sql);
 

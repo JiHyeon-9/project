@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.File" %>
+<%@ include file="db.jsp"%>
 <%
 request.setCharacterEncoding("UTF-8");
 
@@ -18,16 +19,18 @@ String savedId = (String)session.getAttribute("id");
 String savedNickname = (String)session.getAttribute("nickname");
 String savedPassword = (String)session.getAttribute("password");
 String savedMessage = (String)session.getAttribute("message");
-String savedLv = (String)session.getAttribute("Lv");
+String savedLv = (String)session.getAttribute("level");
 String savedExp = (String)session.getAttribute("exp");
 
 // 로그인 체크
 if (savedId == null || savedId.trim().equals("")) {
-    response.sendRedirect("loginForm.jsp");
+    response.sendRedirect("mainpage.jsp");
 } else if (savedNickname == null || savedNickname.trim().equals("")) {
-    response.sendRedirect("loginForm.jsp");
+   response.sendRedirect("mainpage.jsp");
+   
 } else if (savedPassword == null || savedPassword.trim().equals("")) {
-    response.sendRedirect("loginForm.jsp");
+  	response.sendRedirect("mainpage.jsp");
+	
 } else {
     if (savedMessage == null) savedMessage = "";
 %>
@@ -83,7 +86,7 @@ function previewImages(event) {
 
 function previewProfileImage(event) {
     const file = event.target.files[0];
-    if (!file || !file.type.startsWith('image/')) return;	
+    if (!file || !file.type.startsWith('image/')) return;   
 
     const reader = new FileReader();
     reader.onload = function(e) {
@@ -102,32 +105,34 @@ function goBack() {
         <button type="button" class="btn-back" onclick="goBack()">←</button>
         <h2>프로필 설정</h2>
         <form action="profileSettings.jsp" method="post" enctype="multipart/form-data">
-    <div class="profile-picture">
-        <img id="currentProfile" src="<%= imagePath %>" alt="프로필 사진"
-             style="width:120px;height:120px;border-radius:60px;border:1px solid #aaa;">
-        <br /><br />
-        <input type="file" name="userProfile" accept="image/*" onchange="previewProfileImage(event)">
-        <div id="preview" style="margin-top:10px;"></div>
-    </div>
-    <div class="login_input">
-        <div>아이디</div>
-        <input type="text" name="id" value="<%= savedId %>" required readonly/>
-        <div>닉네임</div>
-        <input type="text" name="nickname" value="<%= savedNickname %>" required/>
-        <div>비밀번호</div>
-        <input type="text" name="password" value="<%= savedPassword %>" required/>
-        <div>상태 메시지</div>
-        <input type="text" name="message" value="<%= savedMessage %>" />
-    </div>
-    <div class="button-row">
-        <button type="submit" class="btn-save">저장</button>
-        <form action="logout.jsp" method="post">
-            <button type="submit" class="btn-delete">회원탈퇴</button>
-        </form>
-    </div>
-</form>
-        	</form>
-        </div>
+    		<div class="profile-picture">
+        	<img id="currentProfile" src="<%= imagePath %>" alt="프로필 사진"
+             	style="width:120px;height:120px;border-radius:60px;border:1px solid #aaa;">
+        		<br /><br />
+        	<input type="file" name="userProfile" accept="image/*" onchange="previewProfileImage(event)">
+        	<div id="preview" style="margin-top:10px;"></div>
+    		</div>
+    		
+    		<div class="login_input">
+        	<div>아이디</div>
+		        <input type="text" name="id" value="<%= savedId %>" required readonly/>
+		        <div>닉네임</div>
+		        <input type="text" name="nickname" value="<%= savedNickname %>" required/>
+		        <div>비밀번호</div>
+		        <input type="text" name="password" value="<%= savedPassword %>" required/>
+		        <div>상태 메시지</div>
+		        <input type="text" name="message" value="<%= savedMessage %>" />
+		    </div>
+		    
+    		<div class="button-row">
+    			<form action="profileSettings.jsp" method="post">
+		        	<button type="submit" class="btn-save">저장</button>
+		        </form>
+		        <form action="deleteform.jsp" method="post">
+		            <button type="delete" class="btn-delete">회원탈퇴</button>
+		        </form>
+        	</div>
+		</form>
     </div>
 </body>
 </html>

@@ -1,18 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ include file="db.jsp"%>
 <%
-String url = "jdbc:mysql://localhost:3306/project";
-String dbId = "cye";
-String dbPass = "pwpw12211234*";
-Connection conn = null; 
-PreparedStatement pstmt = null;
 try{
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
-
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	conn =  DriverManager.getConnection(url, dbId, dbPass);
 
 	String sql = "delete from signup where id = ? and password = ? ";
 	pstmt = conn.prepareStatement(sql); 
@@ -22,8 +15,24 @@ try{
 	
 	session.removeAttribute("id");
 	session.removeAttribute("password");
+	
+	Cookie[] cookies = request.getCookies();
+    if(cookies != null){
+        for(Cookie cookie : cookies){
+            if("id".equals(cookie.getName())){
+                cookie.setMaxAge(0);   // 쿠키 만료
+                cookie.setPath("/");   // 경로 지정(생성할 때와 동일해야 함)
+                response.addCookie(cookie);
+            }
+        }
+    }
+    %>
+    <script>
+    alert('회원탈퇴 되었습니다.');
+    </script>
+<%
 
-	out.println("회원탈퇴 되어쓰");
+	response.sendRedirect("mainpage.jsp");
 } catch(Exception e){
     out.print(e);
 } finally {

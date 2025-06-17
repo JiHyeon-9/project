@@ -13,7 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }.Box {
+        }.Box {1
             border: 3px solid;
             padding: 20px 50px 10px 50px;
             min-width: 420px;
@@ -57,7 +57,6 @@
     <div class="Box">
         <div class="Box_title">아이디/비밀번호 찾기</div>
         <form class="Box_form" action=" " method="post">
-            <input type="text" name="name" placeholder="회원이름" required>
             <input type="text" name="nickname" placeholder="닉네임" required>
             <button type="submit">정보 조회</button>
         </form>

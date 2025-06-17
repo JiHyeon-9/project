@@ -2,25 +2,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%  request.setCharacterEncoding("UTF-8"); %>
-    
+    <%@ include file="db.jsp"%>
 <%
-String url = "jdbc:mysql://localhost:3306/profile";
-String dbId = "root";
-String dbPass = "0929";
-
-	Connection conn = null; 
-	PreparedStatement pstmt = null;
-	//pstmt sql에서 값이 정해지지 않았을 때
-	//stmt 값이 이미 정해졌을 때
 	
 try{
 	String id = request.getParameter("id");
 	String password = request.getParameter("password");
 	String nickname = request.getParameter("nickname");
 	String message = request.getParameter("message");
-	
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	conn =  DriverManager.getConnection(url, dbId, dbPass); //conn이랑 클래스랑 연결
 	
 	String sql = "INSERT INTO signup(id, password, nickname, message) values(?, ?, ?, ?)";
 	pstmt = conn.prepareStatement(sql); //sql문 실행

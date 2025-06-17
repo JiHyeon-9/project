@@ -2,22 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.UUID" %>
-
+<%@ include file="db.jsp"%>
 <%
 String guestid = (String) session.getAttribute("guestid");
-
-String url = "jdbc:mysql://localhost:3306/profile";
-String dbId = "root";
-String dbPass = "0929";
-
-Connection conn = null; 
-PreparedStatement pstmt = null;
-ResultSet rs = null;
-
 try {
-	
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	conn =  DriverManager.getConnection(url, dbId, dbPass);
 	
 	boolean exists; //기본값 false
 	do{ 
@@ -51,5 +39,3 @@ if(conn!= null) conn.close();
 if(rs!=null) rs.close();
 }
 %>
-	
-	

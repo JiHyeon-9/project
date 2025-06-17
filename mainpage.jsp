@@ -4,7 +4,7 @@
 <head>
     <title>로그인</title>
     <style>/*아직 db에서 회원정보 읽어서 로그인 성공,실패 기능 미구현, process.jsp 미구현*/
-    	/*로그인 박스*/
+       /*로그인 박스*/
         body {
             margin: 0;
             padding: 0;
@@ -19,7 +19,7 @@
             min-width: 420px;
             min-height: 220px;
             box-sizing: border-box;
-		}.Box_title {
+      }.Box_title {
             text-align: center;
             font-size: 2rem;
             font-weight: bold;
@@ -83,6 +83,9 @@
             <div class="login_input">
                 <input type="text" id="id" name="id" placeholder= "아이디" required>
                 <input type="password" id="password" name="password" placeholder= "비밀번호" required>
+           <label>
+    <input type="checkbox" name="autologin" value="true" checked> 자동 로그인
+         </label>
             </div>
             <div class="login_button">
                 <button type="submit" name="btn" value="login">로그인</button>
@@ -98,7 +101,7 @@
     </div>
     <div class="buttons">
         <button class="sidebuttons" onclick="location.href='ranking.jsp'">랭킹</button>
-        <button class="sidebuttons" onclick="location.href='info.jsp'">설정</button>
+        <button class="sidebuttons" onclick="location.href='settings.jsp'">설정</button>
     </div>
 </body>
 </html>

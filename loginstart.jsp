@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>Add commentMore actions
-<%@ page import="project.Singup","project.dinosaur_db" %> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="project.Signup","project.dinosaur_db" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,8 +73,8 @@
 		String scoer = request.getParameter("scoer");
 	%>
     <div class="Box">
-        <div class="Box_title">환영합니다,<%= project.getnickname()  %> </div>
-        <div class="Box_rank">내 최고 점수,<%= project.getscoer() %> </div>
+        <div class="Box_title">환영합니다,<%= project.getNickname()  %> </div>
+        <div class="Box_rank">내 최고 점수,<%= project.getscore() %> </div>
         <div class="start_button_row">
             <div class="start_button">
                 <button onclick="location.href='(이곳을 게임실행.jsp로 수정)'">GAME START</button>
@@ -86,7 +86,7 @@
     </div>
     <div class="buttons">
         <button class="sidebuttons" onclick="location.href='ranking.jsp'">랭킹</button>
-        <button class="sidebuttons" onclick="location.href='settings.jsp'">설정</button>
+        <button class="sidebuttons" onclick="location.href='info.jsp'">설정</button>
     </div>
 </body>
 </html>
