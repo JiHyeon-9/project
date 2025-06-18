@@ -90,7 +90,7 @@
             <div class="login_button">
                 <button type="submit" name="btn" value="login">로그인</button>
                 <button type="button" class="guest_button" 
-                name="btn" value="guest" onclick="location.href='gueststart.jsp'" formnovalidate>게스트 로그인</button>
+                name="btn" value="guest" onclick="location.href='guestLogin.jsp'" formnovalidate>게스트 로그인</button>
             </div>
         </form>
         <div class="option_link">
@@ -101,7 +101,7 @@
     </div>
     <div class="buttons">
         <button class="sidebuttons" onclick="location.href='ranking.jsp'">랭킹</button>
-        <button class="sidebuttons" onclick="location.href='settings.jsp'">설정</button>
+        <button class="sidebuttons" onclick="location.href='info.jsp'">설정</button>
     </div>
 </body>
 </html>

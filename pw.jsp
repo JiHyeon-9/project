@@ -33,3 +33,4 @@ if(conn!= null) conn.close();
 if(rs!=null) rs.close();
 }
 %>
+<button class="sidebuttons" onclick="location.href='mainpage.jsp'">로그인으로 돌아가기</button>

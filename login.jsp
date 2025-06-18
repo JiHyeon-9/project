@@ -48,7 +48,7 @@ try {
       response.addCookie(login);
    }
 
-   response.sendRedirect("info.jsp"); //게임화면으로 돌아가야 함
+   response.sendRedirect("loginstart.jsp"); //게임화면으로 돌아가야 함
    
 } catch (Exception e){
    e.printStackTrace();

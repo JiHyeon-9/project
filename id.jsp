@@ -5,10 +5,7 @@
 <%
 String nickname = request.getParameter("nickname");
 
-
 try {
-
-	
 	String sql = "select id from signup where nickname=?";
 	pstmt=conn.prepareStatement(sql);
 	
@@ -32,3 +29,5 @@ if(conn!= null) conn.close();
 if(rs!=null) rs.close();
 }
 %>
+
+<button class="sidebuttons" onclick="location.href='mainpage.jsp'">로그인으로 돌아가기</button>

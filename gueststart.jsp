@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-    // 6자리 난수 생성 (100000~999999)
-    int randomNum = (int)(Math.random() * 900000) + 100000;
-    String guestId = "guest" + randomNum;
+    String guestid = (String) session.getAttribute("iddd");
 %>
 <!DOCTYPE html>
 <html>
@@ -63,16 +61,13 @@
 </head>
 <body>
     <div class="Box">
-        <div class="Box_title">환영합니다, <b><%= guestId %></b></div>
+        <div class="Box_title">환영합니다, <b><%= guestid %></b></div>
         <div class="start_button_row">
             <div class="start_button">
-                <button onclick="location.href='(이곳을 게임실행.jsp로 수정)'">GAME START</button>
+                <button onclick="location.href='index.html'">GAME START</button>
             </div>
         </div>
     </div>
-    <div class="buttons">
-        <button class="sidebuttons" onclick="location.href='ranking.jsp'">랭킹</button>
-        <button class="sidebuttons" onclick="location.href='settings.jsp'">설정</button>
-    </div>
+    
 </body>
 </html>

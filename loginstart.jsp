@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="project.Signup","project.dinosaur_db" %> 
+<%@ page import="java.sql.*"%>
+<%@ include file="db.jsp"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,27 +67,40 @@
             margin: 0 5px;
         }
     </style>
+    <%--화면에 로그인한 유저의 최고점수 표시를 위해 추가했습니다. --%>
+    <%
+		String id = (String)session.getAttribute("id");
+		String nickname = (String)session.getAttribute("nickname");
+
+		int bestScore = 0; 
+
+		if (id != null) {
+    		String sql = "SELECT MAX(score) AS best_score FROM scores WHERE user_id = (SELECT user_id FROM signup WHERE id = ?)";
+    		pstmt = conn.prepareStatement(sql);
+    		pstmt.setString(1, id);
+    		rs = pstmt.executeQuery();
+    	  if (rs.next()) {
+        	  bestScore = rs.getInt("best_score");
+    	  }
+    	rs.close();
+    	pstmt.close();
+    	conn.close();
+		}
+	%>
 </head>
 <body>
-	<%
-		String nickname = request.getParameter("nickname");
-		String scoer = request.getParameter("scoer");
-	%>
+	
     <div class="Box">
-        <div class="Box_title">환영합니다,<%= project.getNickname()  %> </div>
-        <div class="Box_rank">내 최고 점수,<%= project.getscore() %> </div>
+        <div class="Box_title">환영합니다, <%= nickname %> 님. </div>
+        <div class="Box_rank"> <%= nickname %> 님의 최고 점수는 <%= bestScore %> 점입니다. </div>
         <div class="start_button_row">
             <div class="start_button">
-                <button onclick="location.href='(이곳을 게임실행.jsp로 수정)'">GAME START</button>
+                <button onclick="location.href='index.html'">GAME START</button>
             </div>
         </div>
         <div class="logout_link">
             <a href="logout.jsp">로그아웃</a>
         </div>
-    </div>
-    <div class="buttons">
-        <button class="sidebuttons" onclick="location.href='ranking.jsp'">랭킹</button>
-        <button class="sidebuttons" onclick="location.href='info.jsp'">설정</button>
     </div>
 </body>
 </html>

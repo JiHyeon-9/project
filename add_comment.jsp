@@ -1,23 +1,55 @@
 <%@ page import="java.sql.*"%>
+<%@ page import="jakarta.servlet.*"%>
+<%@ page import="jakarta.servlet.http.*"%>
 <%@ include file="db.jsp"%>
+
 <%
 request.setCharacterEncoding("UTF-8");
-
-// 세션에서 user_id(id) 가져오기
-Integer userId = (Integer) session.getAttribute("id");
+String writerLoginId = (String) session.getAttribute("id");
 String content = request.getParameter("content");
+String targetUserIdStr = request.getParameter("user_id");
 
-if (userId != null && content != null && !content.trim().isEmpty()) {
-
-	// 댓글 등록 쿼리
-	String sql = "INSERT INTO comments (user_id, content) VALUES (?, ?)";
-	pstmt = conn.prepareStatement(sql);
-	pstmt.setInt(1, userId);
-	pstmt.setString(2, content);
-	pstmt.executeUpdate();
-	pstmt.close();
+if (writerLoginId == null || content == null || content.trim().isEmpty() || targetUserIdStr == null) {
+   out.println("<script>alert('로그인 후 댓글을 작성해주세요.'); location.href='mainpage.jsp';</script>");
+    return;
 }
 
-conn.close();
-response.sendRedirect("ranking.jsp"); // 댓글 작성 후 리다이렉트
+try {
+  
+
+    // 작성자 user_id 확인 (signup에서만!)
+    String writerSql = "SELECT user_id FROM signup WHERE id = ?";
+    PreparedStatement writerStmt = conn.prepareStatement(writerSql);
+    writerStmt.setString(1, writerLoginId);
+    ResultSet writerRs = writerStmt.executeQuery();
+
+    if (!writerRs.next()) {
+        // 게스트거나 유효하지 않은 사용자
+        response.sendRedirect("ranking.jsp");
+        return;
+    }
+
+    int writerId = writerRs.getInt("user_id");
+    int targetUserId = Integer.parseInt(targetUserIdStr);
+
+    String insertSql = "INSERT INTO comments (user_id, writer_id, content) VALUES (?, ?, ?)";
+    PreparedStatement insertStmt = conn.prepareStatement(insertSql);
+    insertStmt.setInt(1, targetUserId);
+    insertStmt.setInt(2, writerId);
+    insertStmt.setString(3, content);
+    insertStmt.executeUpdate();
+
+    insertStmt.close();
+    writerRs.close();
+    writerStmt.close();
+
+    response.sendRedirect("ranking.jsp");
+
+} catch (Exception e) {
+    out.println("오류 발생: " + e.getMessage());
+} finally {
+    try {
+        if (conn != null) conn.close();
+    } catch (Exception e) {}
+}
 %>
