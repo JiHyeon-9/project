@@ -20,7 +20,7 @@ try {
    if (!rs.next()){
       %>
       <script>
-          alert('존재하지 않는 아이디입니다.');
+          alert('존재하지 않는 아이디입니다1.');
           location.href='mainpage.jsp';
       </script>
       <%
